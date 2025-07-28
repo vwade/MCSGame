@@ -55,13 +55,20 @@ void UTempControllerComponent::MoveRight(float Value)
 void UTempControllerComponent::Turn(float Value)
 {
     if (OwnerActor) {
-        OwnerActor->AddControllerYawInput(Value * RotationSpeed * GetWorld()->GetDeltaSeconds());
+        APawn *OwnerPawn = Cast<APawn>(OwnerActor);
+        if (OwnerPawn) {
+            OwnerPawn->AddControllerYawInput(Value * RotationSpeed * GetWorld()->GetDeltaSeconds());
+        }
+        // Optional: else { UE_LOG(LogTemp, Warning, TEXT("TempController attached to non-Pawn actor")); }
     }
 }
 
 void UTempControllerComponent::LookUp(float Value)
 {
     if (OwnerActor) {
-        OwnerActor->AddControllerPitchInput(Value * RotationSpeed * GetWorld()->GetDeltaSeconds());
+        APawn *OwnerPawn = Cast<APawn>(OwnerActor);
+        if (OwnerPawn) {
+            OwnerPawn->AddControllerPitchInput(Value * RotationSpeed * GetWorld()->GetDeltaSeconds());
+        }
     }
 }
