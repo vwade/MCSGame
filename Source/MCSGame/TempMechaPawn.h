@@ -1,26 +1,51 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Actor.h"
+#include "GameFramework/Pawn.h"
+#include "GameFramework/SpringArmComponent.h"
+#include "Camera/CameraComponent.h"
+#include "Components/StaticMeshComponent.h"
 #include "TempMechaPawn.generated.h"
 
 UCLASS()
-class MCSGAME_API ATempMechaPawn : public AActor
+class MCSGAME_API ATempMechaPawn : public APawn
 {
-	GENERATED_BODY()
-	
-public:	
-	// Sets default values for this actor's properties
-	ATempMechaPawn();
+    GENERATED_BODY()
+
+public:
+    ATempMechaPawn();
+
+    virtual void Tick(float DeltaTime) override;
+    virtual void SetupPlayerInputComponent(class UInputComponent *PlayerInputComponent) override;
+
+    // Components
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
+    UStaticMeshComponent *MechaMesh;
+
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
+    USpringArmComponent *SpringArm;
+
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
+    UCameraComponent *ThirdPersonCamera;
+
+    // Movement Vars (Temp basics; expand to 6-axis later)
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
+    float ThrustSpeed = 1000.0f;  // Relativistic thrust scalar
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
+    float RotationSpeed = 100.0f;  // Yaw/Pitch for immersive control
+
+    // Camera Vars (For third-person testing)
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera")
+    float ArmLength = 500.0f;  // Distance from mecha (tweak for 20m scale views)
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera")
+    bool bUseCameraLag = true;  // Smooth follows for high-speed maneuvers
 
 protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-
+    // Input Handlers
+    void MoveForward(float Value);
+    void MoveRight(float Value);
+    void Turn(float Value);
+    void LookUp(float Value);
 };
