@@ -14,14 +14,18 @@ constexpr float MCS_UNIT_SCALE = 100.0f;
 // Use specific typedefs below for type safety.
 template<typename T>
 struct MCSScalar {
-	float Value;  // Stored in meters or equivalent (your mental unit)
+	long double Value;  // Stored in meters or equivalent (your mental unit)
 
-	MCSScalar(float v = 0.0f) : Value(v) {}
+	MCSScalar(double v = 0.0f) : Value(v) {}
 
 	// Implicit conversion to float (UE cm units)
 	operator float() const {
-		return Value * MCS_UNIT_SCALE;
+		return (float)Value * (float)MCS_UNIT_SCALE;
 	}
+	operator double() const {
+		return (double)Value * (double)MCS_UNIT_SCALE;
+	}
+	// stopping double/long double refactor here. we should test first before this stretch goal.
 
 	// Basic operators for math within your system (stays in meters)
 	MCSScalar& operator+=(const MCSScalar& other) { Value += other.Value; return *this; }
