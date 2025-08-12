@@ -23,5 +23,5 @@
 *.gltf filter=lfs diff=lfs merge=lfs -text
 *.glb filter=lfs diff=lfs merge=lfs -text
 *.nif filter=lfs diff=lfs merge=lfs -text
-# Add more for MCS specifics, like .blend for models or .nif for Niagara
 *.rar filter=lfs diff=lfs merge=lfs -text
+# Add more for MCS specifics, like .blend for models or .nif for Niagara
