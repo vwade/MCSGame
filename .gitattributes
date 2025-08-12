@@ -1,3 +1,8 @@
+*.c		filter=spacetab
+*.h		filter=spacetab
+*.cs	filter=spacetab
+*.cpp	filter=spacetab
+
 *.uasset filter=lfs diff=lfs merge=lfs -text
 *.umap filter=lfs diff=lfs merge=lfs -text
 *.upk filter=lfs diff=lfs merge=lfs -text
