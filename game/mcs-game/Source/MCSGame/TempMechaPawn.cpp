@@ -1,4 +1,5 @@
 #include "TempMechaPawn.h"
+#include "Utilities/MCSUnits.h"
 
 ATempMechaPawn::ATempMechaPawn()
 {
@@ -39,7 +40,7 @@ void ATempMechaPawn::SetupPlayerInputComponent(UInputComponent *PlayerInputCompo
 void ATempMechaPawn::MoveForward(float Value)
 {
     if (Value != 0.0f) {
-        FVector Forward = GetActorForwardVector() * Value * ThrustSpeed;
+        FVector Forward = GetActorForwardVector() * Value * ThrustSpeed; // (me, user) see I don't like this, I tend to think of the "actor's" forward vector as the combined direction of local horizontal coords (XZ/Y-Up plane) rather than some precomputed value I have no control over (end rant) | unless there's some way to look inside and control it
         AddActorLocalOffset(Forward, true);  // Sweep for collisions (future heat conversion)
     }
 }
@@ -51,3 +52,10 @@ void ATempMechaPawn::MoveRight(float Value)
         AddActorLocalOffset(Right, true);
     }
 }
+
+//  (me, user) it says its built-in so we comment this attempt out for now
+// void ATempMechaPawn::Turn(float Value) {
+//  if (Value != 0.0f) {
+//      FVector TurnValue = 
+//  }
+// }

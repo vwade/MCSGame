@@ -6,6 +6,7 @@
 #include "Camera/CameraComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "TempMechaPawn.generated.h"
+#include "Utilities/MCSUnits.h"
 
 UCLASS()
 class MCSGAME_API ATempMechaPawn : public APawn
@@ -30,14 +31,14 @@ public:
 
     // Movement Vars (Temp basics; expand to 6-axis later)
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
-    float ThrustSpeed = 1000.0f;  // Relativistic thrust scalar
+    MCSSpeed ThrustSpeed = 4;  // Relativistic thrust scalar (MCS units in meters/s)
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
-    float RotationSpeed = 100.0f;  // Yaw/Pitch for immersive control
+    MCSSpeed RotationSpeed = 6;  // Yaw/Pitch for immersive control
 
     // Camera Vars (For third-person testing)
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera")
-    float ArmLength = 500.0f;  // Distance from mecha (tweak for 20m scale views)
+    MCSLength ArmLength = 16;  // Distance from mecha (tweak for 20m scale views)
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera")
     bool bUseCameraLag = true;  // Smooth follows for high-speed maneuvers
